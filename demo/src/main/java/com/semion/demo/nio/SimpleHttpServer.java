@@ -5,6 +5,7 @@ package com.semion.demo.nio;
 
 import com.semion.demo.socket.MyRequestObject;
 import com.semion.demo.socket.MyResponseObject;
+import com.semion.demo.utils.SerializableUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

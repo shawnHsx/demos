@@ -20,8 +20,11 @@ public class InvocationHadleTest {
     private final static Logger logger = LoggerFactory.getLogger(InvocationHadleTest.class);
 
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, FileNotFoundException {
+        //生成proxy 的代理类com.sun.proxy.$Proxy0的class文件 可进行反编译
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles",true);
+
         // 通过反射获取目标对象实例
-        Hello hello= (Hello) Class.forName("com.jd.invocationHandle.HelloImpl").newInstance();
+        Hello hello= (Hello) Class.forName("com.semion.demo.invocationHandle.HelloImpl").newInstance();
 
         // 获取aop切面类（在目标方法前后需要做的动作）
         InvocationHandler handler = new AopFactory(hello);// 目标对象通过构造方法传入代理类
