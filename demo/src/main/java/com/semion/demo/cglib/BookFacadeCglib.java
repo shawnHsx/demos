@@ -2,6 +2,7 @@ package com.semion.demo.cglib;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.proxy.Callback;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
@@ -33,8 +34,12 @@ public class BookFacadeCglib implements MethodInterceptor {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(this.target.getClass());
         // 回调方法 织入逻辑（原有方法的增强）
-        // this:代表BookFacadeCglib，BookFacadeCglib-->MethodInterceptor-->Callback
-        enhancer.setCallback(this);
+        // this:代表BookFacadeCglib，BookFacadeCglib implements  MethodInterceptor extends Callback
+
+        //Callback[] callbacks=new Callback[]{interceptor,noOp,fixedValue};
+        //enhancer.setCallbacks(callbacks);
+
+        enhancer.setCallback(this);// 需要一个Callback 对象
         // 创建代理对象
         return enhancer.create();
     }

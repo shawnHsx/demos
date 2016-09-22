@@ -12,6 +12,7 @@ public class BookFacadeImpl {
 
 
     void addBook(String words){
+        int i = words.hashCode();
         logger.info("开始添加图书的普通方法。。。。。。。。。。。");
     }
 
