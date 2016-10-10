@@ -24,7 +24,7 @@ public class CglibTest {
         // 创建cglib动态代理类
         BookFacadeCglib cglib = new BookFacadeCglib();
         // 获取代理对象  instance 指向 BookFacadeImpl的子类对象
-        BookFacadeImpl instance = (BookFacadeImpl) cglib.getInstance(new BookFacadeImpl());
+        BookFacadeImpl instance = (BookFacadeImpl) cglib.getInstance2(new BookFacadeImpl());
 
         instance.addBook("thinking in java");
 

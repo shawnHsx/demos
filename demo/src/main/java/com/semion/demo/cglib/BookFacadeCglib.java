@@ -2,10 +2,7 @@ package com.semion.demo.cglib;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cglib.proxy.Callback;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
+import org.springframework.cglib.proxy.*;
 
 import java.lang.reflect.Method;
 
@@ -35,14 +32,62 @@ public class BookFacadeCglib implements MethodInterceptor {
         enhancer.setSuperclass(this.target.getClass());
         // 回调方法 织入逻辑（原有方法的增强）
         // this:代表BookFacadeCglib，BookFacadeCglib implements  MethodInterceptor extends Callback
-
-        //Callback[] callbacks=new Callback[]{interceptor,noOp,fixedValue};
-        //enhancer.setCallbacks(callbacks);
-
         enhancer.setCallback(this);// 需要一个Callback 对象
         // 创建代理对象
         return enhancer.create();
     }
+
+    /**
+     * 返回实现回调的代理对象
+     * @param target
+     * @return
+     */
+    public Object getInstance2(Object target) {
+        this.target = target;
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(this.target.getClass());
+
+        //内部类实现回调拦截
+        enhancer.setCallbackFilter(new CallbackFilter() {
+            @Override
+            public int accept(Method method) {
+                if("addBook".equals(method.getName())){
+                    return 0;//Callback callbacks[0]
+                }else if("methodB".equals(method.getName())){
+                    return 1;//Callback callbacks[1]
+                }else if("methodC".equals(method.getName())){
+                    return 2;//Callback callbacks[2]
+                }
+                return 1;
+            }
+        });
+
+        Callback interceptor= new MethodInterceptor() {
+            @Override
+            public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+                logger.info("before ....");
+                Object o1 = methodProxy.invokeSuper(o, args);
+                logger.info("after .....");
+                return o1;
+            }
+        };
+        //不进行拦截
+        Callback noOp= NoOp.INSTANCE;
+        // 锁定方法返回值，无论被代理类的方法返回什么值，回调方法都返回固定值
+        Callback fixedValue= new FixedValue() {
+            @Override
+            public Object loadObject() throws Exception {
+                Object obj = 123;
+                return obj;
+            }
+        };
+        // 回调方法的数组拦截索引
+        Callback[] callbacks=new Callback[]{interceptor,noOp,fixedValue};
+        enhancer.setCallbacks(callbacks);
+        // 创建代理对象
+        return enhancer.create();
+    }
+
 
     /**
      * 回调方法 拦击所有被调用父类的方法
