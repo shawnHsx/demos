@@ -16,4 +16,14 @@ public class BookFacadeImpl {
         logger.info("开始添加图书的普通方法。。。。。。。。。。。");
     }
 
+    void editBook(String words){
+        int i = words.hashCode();
+        logger.info("edit 图书的普通方法。。。。。。。。。。。");
+    }
+
+    void delBook(String words){
+        int i = words.hashCode();
+        logger.info("del 图书的普通方法。。。。。。。。。。。");
+    }
+
 }

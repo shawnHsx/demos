@@ -61,7 +61,7 @@ public class RPCFramework {
                                 Method method = serviceName.getClass().getMethod(methodName, paramTypes);
 
                                 result = method.invoke(serviceName, params);// 执行serviceName的对象的该方法
-
+                                // 执行结果返回给客户端
                                 output.writeObject(result);
 
                             } catch (Throwable t) {

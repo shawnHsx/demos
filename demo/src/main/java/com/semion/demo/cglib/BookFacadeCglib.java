@@ -53,9 +53,9 @@ public class BookFacadeCglib implements MethodInterceptor {
             public int accept(Method method) {
                 if("addBook".equals(method.getName())){
                     return 0;//Callback callbacks[0]
-                }else if("methodB".equals(method.getName())){
+                }else if("editBook".equals(method.getName())){
                     return 1;//Callback callbacks[1]
-                }else if("methodC".equals(method.getName())){
+                }else if("delBook".equals(method.getName())){
                     return 2;//Callback callbacks[2]
                 }
                 return 1;

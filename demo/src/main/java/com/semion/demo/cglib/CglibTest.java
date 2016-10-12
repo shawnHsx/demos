@@ -26,7 +26,11 @@ public class CglibTest {
         // 获取代理对象  instance 指向 BookFacadeImpl的子类对象
         BookFacadeImpl instance = (BookFacadeImpl) cglib.getInstance2(new BookFacadeImpl());
 
-        instance.addBook("thinking in java");
+       // instance.addBook("thinking in java");
+
+       // instance.editBook("edit");
+
+        instance.delBook("66666");
 
     }
 
