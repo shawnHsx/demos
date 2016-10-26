@@ -1,5 +1,7 @@
 package com.semion.demo.cglib;
 
+import org.springframework.cglib.core.DebuggingClassWriter;
+
 /**
  * Created by heshuanxu on 2016/6/7.
  *
@@ -21,10 +23,12 @@ public class CglibTest {
      * @param args
      */
     public static void main(String[] args){
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "e:\\\\proxy");
+        //System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "e:\\proxy");
         // 创建cglib动态代理类
         BookFacadeCglib cglib = new BookFacadeCglib();
         // 获取代理对象  instance 指向 BookFacadeImpl的子类对象
-        BookFacadeImpl instance = (BookFacadeImpl) cglib.getInstance2(new BookFacadeImpl());
+        BookFacadeImpl instance = (BookFacadeImpl) cglib.getInstance(new BookFacadeImpl());
 
        // instance.addBook("thinking in java");
 

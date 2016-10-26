@@ -4,10 +4,9 @@ package com.semion.demo.thread;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * java自带线程池 ---创建5个线程打印List集合
@@ -25,7 +24,27 @@ public class ThreadTest {
         // 线程个数
         int threadNum = strList.size()<5?strList.size():5;
 
+
+         /*int corePoolSize ：核心线程数 当线程数<corePoolSize ，会创建线程执行runnable
+           int maximumPoolSize：最大线程数 最大值（2^29）  当线程数 >= corePoolSize的时候，会把runnable放入workQueue中
+           long keepAliveTime ：保持存活时间
+           TimeUnit unit ：时间单位
+           BlockingQueue<Runnable> workQueue 保存任务的阻塞队列
+           ThreadFactory threadFactory ：创建线程的工厂（默认）
+           RejectedExecutionHandler handler ：决绝策略（默认）
+         */
+        /*任务执行过程：
+        1、当线程数小于corePoolSize时，创建线程执行任务。
+
+        2、当线程数大于等于corePoolSize并且workQueue没有满时，放入workQueue中
+
+        3、线程数大于等于corePoolSize并且当workQueue满时，新任务新建线程运行，线程总数要小于maximumPoolSize
+
+        4、当线程总数等于maximumPoolSize并且workQueue满了的时候执行handler的rejectedExecution。也就是拒绝策略。
+        */
+
         ThreadPoolExecutor executor = new ThreadPoolExecutor(2,threadNum,300, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<Runnable>(3));
+
 
         for (int i = 0; i < threadNum; i++) {
             executor.execute(new PrintStrThread(strList,i,threadNum));
@@ -34,6 +53,7 @@ public class ThreadTest {
           executor.shutdown();
         // 立即结束线程
         executor.shutdownNow();
+
     }
 
 

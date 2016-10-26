@@ -22,14 +22,14 @@ public class BookFacadeCglib implements MethodInterceptor {
      * 创建代理对象 -- 实现被代理对象的子类
      *
      *         原理就是用Enhancer生成一个原有类的子类，并且设置好callback ，
-     *         则原有类的每个方法调用都会转成调用实现了MethodInterceptor接口的proxy的intercept()；
+     *         则原有类的每个方法调用都会转成调用实现了MethodInterceptor接口的proxy的intercept()
      * @param target
      * @return
      */
     public Object getInstance(Object target) {
         this.target = target;
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(this.target.getClass());
+        enhancer.setSuperclass(this.target.getClass());//设置目标类
         // 回调方法 织入逻辑（原有方法的增强）
         // this:代表BookFacadeCglib，BookFacadeCglib implements  MethodInterceptor extends Callback
         enhancer.setCallback(this);// 需要一个Callback 对象
@@ -90,18 +90,18 @@ public class BookFacadeCglib implements MethodInterceptor {
 
 
     /**
-     * 回调方法 拦击所有被调用父类的方法
-     * @param o
-     * @param method
+     * @param obj 动态生成的子类对象
+     * @param method 原始类的方法
      * @param args  // 方法参数
      * @param methodProxy
      * @return
      * @throws Throwable
      */
     @Override
-    public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+    public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         logger.info("开启事务");
-        Object o1 = methodProxy.invokeSuper(o, args);
+        Object o1 = methodProxy.invokeSuper(obj, args);// 调用代理子类的对应原始方法
+        //methodProxy.invoke(obj,args)  该方法是执行动态生成的子类的方法，如果obj是子类，会发生内存溢出，子类的方法不挺地进入intercept方法，而这个方法又去调用子类的方法，两个方法直接循环调用了
         logger.info("提交事务");
         return o1;
     }
