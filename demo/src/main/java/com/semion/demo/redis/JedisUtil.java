@@ -16,10 +16,11 @@ public class JedisUtil {
 
     static {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
+        //最大连接数默认8
         poolConfig.setMaxTotal(30);
         // 获取连接的最大等待毫秒数 默认-1
         poolConfig.setMaxWaitMillis(5000);
-        // 最大连接数
+        // 最大空闲连接数, 默认8个
         poolConfig.setMaxIdle(20);//20
         //最小空闲连接数 默认0
         poolConfig.setMinIdle(5);
