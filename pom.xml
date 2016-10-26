@@ -178,6 +178,12 @@
         <artifactId>jackson-mapper-lgpl</artifactId>
         <version>1.9.6</version>
       </dependency>
+      <!--reids 客户端-->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>2.9.0</version>
+      </dependency>
 
     </dependencies>
   </dependencyManagement>
