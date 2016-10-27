@@ -33,6 +33,7 @@
         <artifactId>servlet-api</artifactId>
         <version>2.4</version>
       </dependency>
+
       <dependency>
         <groupId>org.apache.velocity</groupId>
         <artifactId>velocity</artifactId>
@@ -62,6 +63,18 @@
         <groupId>commons-digester</groupId>
         <artifactId>commons-digester</artifactId>
         <version>2.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>3.2.6.RELEASE</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>3.2.6.RELEASE</version>
       </dependency>
 
       <dependency>
@@ -184,6 +197,13 @@
         <artifactId>jedis</artifactId>
         <version>2.9.0</version>
       </dependency>
+      <!--spring整合reids-->
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-redis</artifactId>
+        <version>1.8.0.BUILD-SNAPSHOT</version>
+      </dependency>
+
 
     </dependencies>
   </dependencyManagement>
