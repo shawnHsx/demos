@@ -3,9 +3,6 @@ package com.semion.demo.Error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by heshuanxu on 2016/10/24.
  */
