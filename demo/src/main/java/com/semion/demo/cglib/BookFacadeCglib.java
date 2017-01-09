@@ -93,7 +93,7 @@ public class BookFacadeCglib implements MethodInterceptor {
      * @param obj 动态生成的子类对象
      * @param method 原始类的方法
      * @param args  // 方法参数
-     * @param methodProxy
+     * @param methodProxy 代理类的方法 每个原始的方法在代理子类中会有两个对应的方法
      * @return
      * @throws Throwable
      */

@@ -2,8 +2,11 @@ package com.semion.demo.invocationHandle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.misc.ProxyGenerator;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
@@ -21,13 +24,17 @@ public class InvocationHadleTest {
 
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, FileNotFoundException {
         //生成proxy 的代理类com.sun.proxy.$Proxy0的class文件 可进行反编译
-        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles",true);
+
+        //System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles",true);
 
         // 通过反射获取目标对象实例
         Hello hello= (Hello) Class.forName("com.semion.demo.invocationHandle.HelloImpl").newInstance();
 
         // 获取aop切面类（在目标方法前后需要做的动作）
         InvocationHandler handler = new AopFactory(hello);// 目标对象通过构造方法传入代理类
+
+        // 动态生成的代理类
+        writeProxyClassToHardDisk("E:\\$Proxy0.class");
 
         // 生成代理对象
         /**
@@ -39,6 +46,35 @@ public class InvocationHadleTest {
 
         // 通过代理对象调用方法
         proxy.setInfo("hello", "world");
+    }
+
+    /**
+     * 保存代理类到本地
+     * @param path
+     */
+    public static void writeProxyClassToHardDisk(String path) {
+
+        // 获取代理类的字节码
+        /**
+         * $Proxy0 为代理类的类名
+         */
+        byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", HelloImpl.class.getInterfaces());
+
+        FileOutputStream out = null;
+
+        try {
+            out = new FileOutputStream(path);
+            out.write(classFile);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

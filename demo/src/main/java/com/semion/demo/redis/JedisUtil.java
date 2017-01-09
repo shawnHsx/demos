@@ -31,7 +31,7 @@ public class JedisUtil {
         poolConfig.setTimeBetweenEvictionRunsMillis(3000l);
         poolConfig.setNumTestsPerEvictionRun(-1);
 
-        jedisPool = new JedisPool(poolConfig,"172.24.7.79",6379);
+        jedisPool = new JedisPool(poolConfig,"10.13.80.54",7001);
 
         System.out.println("redis 连接结果：" + ping());
     }
@@ -66,8 +66,6 @@ public class JedisUtil {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
-
-            jedis.lpush(key,value);
         } catch (Exception e) {
             e.printStackTrace();
             //jedisPool.returnResource(jedis); 在close 方法中释放资源到连接池
