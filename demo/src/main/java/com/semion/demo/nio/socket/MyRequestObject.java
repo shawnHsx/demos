@@ -1,14 +1,13 @@
-package com.semion.demo.socket;
+package com.semion.demo.nio.socket;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 /**
  * Created by heshuanxu on 2016/9/18.
  */
-public class MyResponseObject implements Serializable {
+public class MyRequestObject implements Serializable {
 
-    private static final long serialVersionUID = 4696326090024768991L;
+    private static final long serialVersionUID = -3766970295910259882L;
 
     private String name;
 
@@ -16,7 +15,8 @@ public class MyResponseObject implements Serializable {
 
     private byte[] bytes;
 
-    public MyResponseObject(String name, String value) {
+
+    public MyRequestObject(String name, String value) {
         this.name = name;
         this.value = value;
         this.bytes = new byte[1024];
@@ -48,7 +48,7 @@ public class MyResponseObject implements Serializable {
 
     @Override
     public String toString() {
-        return "MyResponseObject{" +
+        return "MyRequestObject{" +
                 "name='" + name + '\'' +
                 ", value='" + value + '\'' +
                 ", bytes=" + bytes.length +
