@@ -35,7 +35,7 @@ public class CglibTest {
 
         instance.delBook("66666");
 
-        //System.in.read();
+        System.in.read();
 
     }
 
