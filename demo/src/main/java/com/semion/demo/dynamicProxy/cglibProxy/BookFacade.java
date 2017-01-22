@@ -1,4 +1,4 @@
-package com.semion.demo.cglib;
+package com.semion.demo.dynamicProxy.cglibProxy;
 
 /**
  * Created by heshuanxu on 2016/6/7.

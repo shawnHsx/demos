@@ -1,4 +1,4 @@
-package com.semion.demo.cglib;
+package com.semion.demo.dynamicProxy.cglibProxy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class BookFacadeImpl {
 
     void delBook(String words){
         int i = words.hashCode();
-        logger.info("del 图书的普通方法。。。。。。。。。。。");
+        logger.info("param:{},delBook()方法图书的普通方法",words);
     }
 
 }

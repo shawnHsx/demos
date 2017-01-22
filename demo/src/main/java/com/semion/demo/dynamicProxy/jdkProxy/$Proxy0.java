@@ -1,6 +1,4 @@
-package com.semion.demo.cglib;
-
-import com.semion.demo.invocationHandle.Hello;
+package com.semion.demo.dynamicProxy.jdkProxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -96,10 +94,10 @@ public final class $Proxy0 extends Proxy implements Hello {
         try {
             m1 = Class.forName("java.lang.Object").getMethod("equals", new Class[]{Class.forName("java.lang.Object")});
             m2 = Class.forName("java.lang.Object").getMethod("toString", new Class[0]);
-            m6 = Class.forName("com.semion.demo.invocationHandle.Hello").getMethod("dispaly", new Class[0]);
-            m3 = Class.forName("com.semion.demo.invocationHandle.Hello").getMethod("setInfo", new Class[]{Class.forName("java.lang.String"), Class.forName("java.lang.String")});
-            m4 = Class.forName("com.semion.demo.invocationHandle.Hello").getMethod("getinfos1", new Class[0]);
-            m5 = Class.forName("com.semion.demo.invocationHandle.Hello").getMethod("getinfos2", new Class[0]);
+            m6 = Class.forName("Hello").getMethod("dispaly", new Class[0]);
+            m3 = Class.forName("Hello").getMethod("setInfo", new Class[]{Class.forName("java.lang.String"), Class.forName("java.lang.String")});
+            m4 = Class.forName("Hello").getMethod("getinfos1", new Class[0]);
+            m5 = Class.forName("Hello").getMethod("getinfos2", new Class[0]);
             m0 = Class.forName("java.lang.Object").getMethod("hashCode", new Class[0]);
         } catch (NoSuchMethodException localNoSuchMethodException) {
             throw new NoSuchMethodError(localNoSuchMethodException.getMessage());

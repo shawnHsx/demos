@@ -1,4 +1,4 @@
-package com.semion.demo.invocationHandle;
+package com.semion.demo.dynamicProxy.jdkProxy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class InvocationHadleTest {
         //System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles",true);
 
         // 通过反射获取目标对象实例
-        Hello hello= (Hello) Class.forName("com.semion.demo.invocationHandle.HelloImpl").newInstance();
+        Hello hello= (Hello) Class.forName("HelloImpl").newInstance();
 
         // 获取aop切面类（在目标方法前后需要做的动作）
         InvocationHandler handler = new AopFactory(hello);// 目标对象通过构造方法传入代理类

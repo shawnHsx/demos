@@ -1,4 +1,4 @@
-package com.semion.demo.invocationHandle;
+package com.semion.demo.dynamicProxy.jdkProxy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

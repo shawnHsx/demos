@@ -1,6 +1,9 @@
-java动态代理是利用反射机制生成一个实现代理接口类的匿名类，在调用具体方法前调用InvokeHandler来处理。
-而cglib动态代理是利用asm开源包，对代理对象类的class文件加载进来，通过修改其字节码生成子类来处理。
+1.java动态代理是利用反射机制生成一个实现代理接口类的匿名类，在调用具体方法前调用
+  InvokeHandler来处理。
+2.而cglib动态代理是利用asm开源包，对代理对象类的class文件加载进来，通过修改其字
+  节码生成子类来处理。
 
+Spring代理的机制如下：
 1、如果目标对象实现了接口，默认情况下会采用JDK的动态代理实现AOP
 2、如果目标对象实现了接口，可以强制使用CGLIB实现AOP
 3、如果目标对象没有实现了接口，必须采用CGLIB库，spring会自动在JDK动态代理和CGLIB之间转换
@@ -21,7 +24,7 @@ CallbackFilter
 (3)FixedValue：表示锁定方法返回值，无论被代理类的方法返回什么值，回调方法都返回固定值。
 
 
-----代理类特性：
+JDK代理类特性：
 1.继承了Proxy类，实现了代理的接口，由于java不能多继承，这里已经继承了Proxy类了
   不能再继承其他的类，所以JDK的动态代理不支持对实现类的代理，只支持接口的代理。
 2.提供了一个使用InvocationHandler作为参数的构造方法。
@@ -30,7 +33,7 @@ CallbackFilter
 5.代理类实现代理接口的方法，只是简单的调用了InvocationHandler的invoke方法，
   我们可以在invoke方法中进行一些特殊操作，甚至不调用实现的方法，直接返回。
 
-代理类如下：
+JDK代理类实现如下：
 public final class $Proxy0 extends Proxy implements Hello ｛
   ......详见$Proxy0文件
 ｝

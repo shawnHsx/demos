@@ -1,4 +1,4 @@
-package com.semion.demo.invocationHandle;
+package com.semion.demo.dynamicProxy.jdkProxy;
 
 /**
  * Created by heshuanxu on 2016/6/6.
