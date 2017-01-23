@@ -26,6 +26,7 @@ public class CglibTest {
      */
     public static void main(String[] args) throws IOException {
         //System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "e:\\\\proxy");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\\\\\workspace\\\\\\demos\\\\\\demo\\\\\\src\\\\\\main\\\\\\java\\\\\\com\\\\\\semion\\\\\\demo\\\\\\dynamicProxy\\\\\\cglibProxy");
 
         // 创建cglib动态代理类
         BookFacadeCglib cglib = new BookFacadeCglib();
