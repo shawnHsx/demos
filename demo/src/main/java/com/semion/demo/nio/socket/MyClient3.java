@@ -15,7 +15,7 @@ public class MyClient3 {
 	private final static Logger logger = Logger.getLogger(MyClient3.class.getName());
 	
 	public static void main(String[] args) throws Exception {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			final int idx = i;
 			new Thread(new MyRunnable(idx)).start();
 		}
@@ -41,8 +41,8 @@ public class MyClient3 {
 				// 发送数据到服务端
 				sendData(socketChannel, myRequestObject);
 				// 接收服务端返回数据
-				MyResponseObject myResponseObject = receiveData(socketChannel);
-				logger.log(Level.INFO, myResponseObject.toString());
+				/*MyResponseObject myResponseObject = receiveData(socketChannel);
+				logger.log(Level.INFO, myResponseObject.toString());*/
 
 			} catch (Exception ex) {
 				logger.log(Level.SEVERE, null, ex);
