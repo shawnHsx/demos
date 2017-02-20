@@ -1,4 +1,4 @@
-package com.semion.demo.redis;
+package com.semion.web.action;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +7,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by heshuanxu on 2016/10/26.

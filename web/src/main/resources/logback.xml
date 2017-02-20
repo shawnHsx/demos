@@ -91,7 +91,7 @@
     </appender>
 
     <!-- level:默认为root的打印级别;additivity:是否向上级loger传递打印信息。默认是true。-->
-    <logger name="com.semion.*" level="${demos.log.level}" additivity="true">
+    <logger name="com.semion" level="${demos.log.level}" additivity="true">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="APP_INFO" />
         <appender-ref ref="APP_ERROR" />
@@ -100,7 +100,7 @@
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
-      <!--  <appender-ref ref="SYS_INFO" />
-        <appender-ref ref="SYS_ERROR" />-->
+        <appender-ref ref="SYS_INFO" />
+        <appender-ref ref="SYS_ERROR" />
     </root>
 </configuration>
