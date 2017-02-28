@@ -6,7 +6,7 @@ package com.semion.demo;
 public class TestMain {
 
     public static void main(String[] args){
-        //getNums();
+        getNums();
         //getSuShu();
     }
 
