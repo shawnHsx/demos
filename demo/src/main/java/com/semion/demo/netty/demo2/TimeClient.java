@@ -10,6 +10,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 
 /**
  * Created by heshuanxu on 2017/2/24.
@@ -35,8 +37,13 @@ public class TimeClient {
                             socketChannel.pipeline().addLast(new MyTimeClientHandler());
                         }
                     });
-            ChannelFuture future = bootstrap.connect(host, port).sync();
-
+            ChannelFuture future = bootstrap.connect(host, port);
+            future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) throws Exception {
+                    System.out.println("Cilent异步操作结果："+future.isSuccess());
+                }
+            });
             future.channel().closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();

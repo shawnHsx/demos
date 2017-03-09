@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Children extends Parent {
     private final static Logger logger = LoggerFactory.getLogger(Children.class);
+
     static {
         logger.info("Children init...");
     }

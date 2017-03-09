@@ -26,7 +26,7 @@ public class MyTimeClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("channelActive 方法被调用");
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 2; i++) {
             ByteBuf buffer = Unpooled.buffer(this.req.length);
             buffer.writeBytes(this.req);
             ctx.writeAndFlush(buffer);

@@ -25,15 +25,15 @@ public class TimeServer {
     }
 
     private void bind(int port) throws Exception {
-        // 配置服务单nio线程组
+        // 配置服务单nio线程组----Reactor 多线程模型
         EventLoopGroup bossGroup = new NioEventLoopGroup();//线程组---用于服务端接受客户端连接
         EventLoopGroup workGroup = new NioEventLoopGroup();//线程组---用于SocketChannel的读写
 
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();// 服务端的辅助启动类
-            bootstrap.group(bossGroup,workGroup)
+            bootstrap.group(bossGroup, workGroup)
                     .channel(NioServerSocketChannel.class)// NioServerSocketChannel等同于 NIO 中的ServerSocketChannel
-                    .option(ChannelOption.SO_BACKLOG,1024)// 设置TCP参数 接受连接的缓冲池大小
+                    .option(ChannelOption.SO_BACKLOG, 1024)// 设置TCP参数 接受连接的缓冲池大小
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {

@@ -18,7 +18,6 @@ public class ThreadLocalTest {
         Thread t2 = new Thread(new ThreadA(sequence));
         Thread t3 = new Thread(new ThreadA(sequence));
 
-        
 
         t1.start();
 
@@ -35,32 +34,32 @@ public class ThreadLocalTest {
 }
 
 
-interface Sequence{
+interface Sequence {
     int getNum();
 }
 
-class SequenceImpl implements Sequence{
+class SequenceImpl implements Sequence {
 
     private static int number = 0;
 
     @Override
     public int getNum() {
-        number= number+1;
+        number = number + 1;
         return number;
     }
 }
 
 
-class SequenceImpl2 implements Sequence{
+class SequenceImpl2 implements Sequence {
 
     private final static Logger logger = LoggerFactory.getLogger(SequenceImpl2.class);
 
     /**
      * 此处重写initialValue(属于ThreadLocal类)方法，默认返回为null；实现了共享static变量 但是每个线程都是独立的，不会发生非线程安全问题
-     *
+     * <p>
      * numContainer 维护了线程局部变量的Map类型，initialValue 方法是需要开发者来实现的，获取变量的初始值。
      */
-    private static ThreadLocal<Integer> numContainer = new ThreadLocal<Integer>(){
+    private static ThreadLocal<Integer> numContainer = new ThreadLocal<Integer>() {
         @Override
         protected Integer initialValue() {
             return 0;
@@ -70,14 +69,13 @@ class SequenceImpl2 implements Sequence{
 
     @Override
     public int getNum() {
-        numContainer.set(numContainer.get()+1);
+        numContainer.set(numContainer.get() + 1);
         return numContainer.get();
     }
 }
 
 
-
-class ThreadA implements Runnable{
+class ThreadA implements Runnable {
 
 
     private final static Logger logger = LoggerFactory.getLogger(ThreadA.class);
@@ -92,7 +90,7 @@ class ThreadA implements Runnable{
     @Override
     public void run() {
         for (int i = 0; i < 3; i++) {
-            logger.info("thread Name:"+Thread.currentThread().getName()+"===>"+sequence.getNum());
+            logger.info("thread Name:" + Thread.currentThread().getName() + "===>" + sequence.getNum());
         }
     }
 }

@@ -33,9 +33,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A simple TCP server, write back to the client every received messages.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
  */
 public class NioEchoServer {
 

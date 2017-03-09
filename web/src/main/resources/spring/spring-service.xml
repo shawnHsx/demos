@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-       <bean id="enhancer" class="org.springframework.cglib.proxy.Enhancer">
-       </bean>
-       <bean id="jedisUtil" class="com.semion.web.action.JedisUtil">
-       </bean>
+    <bean id="enhancer" class="org.springframework.cglib.proxy.Enhancer">
+    </bean>
+    <bean id="jedisUtil" class="com.semion.web.action.JedisUtil">
+    </bean>
 
 </beans>

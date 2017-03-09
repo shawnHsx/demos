@@ -12,13 +12,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class SpringThreadPool {
 
 
-   static ThreadPoolTaskExecutor poolTaskExecutor = null;
+    static ThreadPoolTaskExecutor poolTaskExecutor = null;
 
     /**
      * spring 中直接调用线程池
      */
 
-    static{
+    static {
         // 执行任务的线程池
         poolTaskExecutor = new ThreadPoolTaskExecutor();
         // 线程池的缓冲队列
@@ -37,13 +37,13 @@ public class SpringThreadPool {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         for (int i = 0; i < 50; i++) {
-            poolTaskExecutor.execute(new PrintThread("t"+i));
+            poolTaskExecutor.execute(new PrintThread("t" + i));
         }
         //检查活动的线程，如果活动线程数为0则关闭线程池
         int flag = 0;
-        while(flag==0){
+        while (flag == 0) {
             int count = poolTaskExecutor.getActiveCount();
             System.out.println("Active Threads : " + count);
             /*try {
@@ -51,9 +51,9 @@ public class SpringThreadPool {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }*/
-            if(count==0){
+            if (count == 0) {
                 poolTaskExecutor.shutdown();
-                flag=1;
+                flag = 1;
             }
         }
 

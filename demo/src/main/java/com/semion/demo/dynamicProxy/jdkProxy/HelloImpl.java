@@ -32,6 +32,6 @@ public class HelloImpl implements Hello {
 
     @Override
     public void dispaly() {
-        logger.info("infos:{},infos2:{}",infos1,infos2);
+        logger.info("infos:{},infos2:{}", infos1, infos2);
     }
 }

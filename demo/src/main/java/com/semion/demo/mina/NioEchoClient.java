@@ -33,9 +33,8 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * A simple TCP client, write back to the client every received messages.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
  */
 public class NioEchoClient {
 

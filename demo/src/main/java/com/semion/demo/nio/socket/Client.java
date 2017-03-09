@@ -21,7 +21,7 @@ public class Client {
 
     public static void main(String[] arsg) throws IOException {
         Client client = new Client();
-        client.initClient("localhost",8080);
+        client.initClient("localhost", 8080);
         client.listen();
     }
 
@@ -53,7 +53,7 @@ public class Client {
                         logger.info("isConnectable is true");
                         SocketChannel sc = (SocketChannel) key.channel();
                         //如果正在连接，则等待完成连接
-                        if(sc.isConnectionPending()){
+                        if (sc.isConnectionPending()) {
                             sc.finishConnect();
                         }
                         sc.configureBlocking(false);
@@ -85,6 +85,7 @@ public class Client {
 
     /**
      * 读取消息并返回消息到client
+     *
      * @param key
      * @throws IOException
      */
@@ -94,7 +95,7 @@ public class Client {
         sc.read(buffer);
         byte[] array = buffer.array();
         String message = new String(array).trim();
-        logger.info("client received msg ：{}",message);
+        logger.info("client received msg ：{}", message);
         //sc.write(ByteBuffer.wrap(message.getBytes()));// 消息返回给server
     }
 

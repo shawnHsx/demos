@@ -8,6 +8,6 @@ public class HelloServiceImpl2 implements HelloService {
     @Override
     public String sayHi(String words) {
 
-        return "hello2 Impl "+ words;
+        return "hello2 Impl " + words;
     }
 }

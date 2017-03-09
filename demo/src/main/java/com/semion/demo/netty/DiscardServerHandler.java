@@ -12,7 +12,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)  {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf in = (ByteBuf) msg;
         System.out.println("===============hellow world==========================");
         try {
@@ -27,9 +27,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        //super.exceptionCaught(ctx, cause);
         // 发生异常时关闭连接
-        cause.printStackTrace();;
+        cause.printStackTrace();
+        ;
         ctx.close();
     }
 }

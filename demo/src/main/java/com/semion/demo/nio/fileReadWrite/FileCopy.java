@@ -12,23 +12,21 @@ public class FileCopy {
 
     /**
      *   IO                NIO
-        面向流            面向缓冲
-        阻塞IO            非阻塞IO
-        无                选择器
+     面向流            面向缓冲
+     阻塞IO            非阻塞IO
+     无                选择器
      *
      */
 
     /**
      * 缓冲区内部细节：状态变量：position，limit，capacity
-     *  position：跟踪从缓冲区获取了多少数据
-     *  limit：还有多少数据需要取出（缓冲区写入通道），或者还有多少空间可以放数据（通道写入缓冲区）
-     *  capacity：缓冲区的最大容量
-     *
-     *  clear()方法：重置缓冲区，1.将limit设置为与capacity相同；2.position设置为0。
-     *  flip()方法：1.将limit设置为position值，2.设置为position为0；
-     *
+     * position：跟踪从缓冲区获取了多少数据
+     * limit：还有多少数据需要取出（缓冲区写入通道），或者还有多少空间可以放数据（通道写入缓冲区）
+     * capacity：缓冲区的最大容量
+     * <p>
+     * clear()方法：重置缓冲区，1.将limit设置为与capacity相同；2.position设置为0。
+     * flip()方法：1.将limit设置为position值，2.设置为position为0；
      */
-
 
 
     public static void main(String args[]) throws Exception {
@@ -43,32 +41,31 @@ public class FileCopy {
 
 
     public static void writeMsg() throws IOException {
-        byte message[] = { 83, 111, 109, 101, 32, 98, 121, 116, 101, 115, 46 };//字节数组内容： Some bytes.
+        byte message[] = {83, 111, 109, 101, 32, 98, 121, 116, 101, 115, 46};//字节数组内容： Some bytes.
 
-        System.out.print("字节数组内容:"+new String(message));
+        System.out.print("字节数组内容:" + new String(message));
 
-        FileOutputStream fout = new FileOutputStream( "E://myclass/a.txt" );
+        FileOutputStream fout = new FileOutputStream("E://myclass/a.txt");
 
         FileChannel fc = fout.getChannel();
 
-        ByteBuffer buffer = ByteBuffer.allocate( 1024 );
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
 
-        for (int i=0; i<message.length; ++i) {
-            buffer.put( message[i] );
+        for (int i = 0; i < message.length; ++i) {
+            buffer.put(message[i]);
         }
 
         buffer.flip();
 
-        fc.write( buffer );
+        fc.write(buffer);
 
         fout.close();
     }
 
 
-
-
     /**
      * 文件读写的过程
+     *
      * @throws java.io.IOException
      */
     private static void fileCopy() throws IOException {
@@ -83,10 +80,10 @@ public class FileCopy {
         //创建缓冲区
         ByteBuffer buffer = ByteBuffer.allocate(512);
 
-        while(true){
+        while (true) {
             buffer.clear();//重置缓冲区
             int len = readChannel.read(buffer);// 读取文件
-            if(len==-1){// 读到文件结尾
+            if (len == -1) {// 读到文件结尾
                 break;
             }
             buffer.flip();
@@ -101,11 +98,8 @@ public class FileCopy {
 
     /**
      * 文件内存映射
-     * @throws java.io.IOException
      *
-     * 功能：访问磁盘上的数据文件，这使你可以不必对文件执行I / O操作，并且可以不必对文件内容进行缓存。
-     *
-     *
+     * @throws java.io.IOException 功能：访问磁盘上的数据文件，这使你可以不必对文件执行I / O操作，并且可以不必对文件内容进行缓存。
      */
     private static void fileMapping() throws IOException {
 
@@ -113,7 +107,7 @@ public class FileCopy {
 
         FileChannel fc = raf.getChannel();
         // 将文件映射到内存中
-        MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0,raf.length());
+        MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0, raf.length());
         while (mbb.hasRemaining()) {
             System.out.print((char) mbb.get());
         }

@@ -36,27 +36,28 @@ public class JedisUtil {
         poolConfig.setTimeBetweenEvictionRunsMillis(3000l);
         poolConfig.setNumTestsPerEvictionRun(-1);
 
-        jedisPool = new JedisPool(poolConfig,"127.0.0.1",6379);
-        logger.info("redis 连接INFO ：{}",ping());
+        jedisPool = new JedisPool(poolConfig, "127.0.0.1", 6379);
+        logger.info("redis 连接INFO ：{}", ping());
         System.out.println("redis 连接结果：" + ping());
     }
 
     /**
      * 存储redis队列 --顺序存储
+     *
      * @param key
      * @param value
      */
-    public static void lpush(byte[] key,byte[] value){
+    public static void lpush(byte[] key, byte[] value) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
 
-            jedis.lpush(key,value);
+            jedis.lpush(key, value);
         } catch (Exception e) {
             e.printStackTrace();
             //jedisPool.returnResource(jedis); 在close 方法中释放资源到连接池
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -64,10 +65,11 @@ public class JedisUtil {
 
     /**
      * 存储redis队列 --顺序存储队列头部
+     *
      * @param key
      * @param value
      */
-    public static void lpush(String key,String value){
+    public static void lpush(String key, String value) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -75,7 +77,7 @@ public class JedisUtil {
             e.printStackTrace();
             //jedisPool.returnResource(jedis); 在close 方法中释放资源到连接池
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -83,10 +85,11 @@ public class JedisUtil {
 
     /**
      * 存储redis队列 --反向存储
+     *
      * @param key
      * @param value
      */
-    public static void rpush(byte[] key,byte[] value){
+    public static void rpush(byte[] key, byte[] value) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -96,7 +99,7 @@ public class JedisUtil {
             e.printStackTrace();
             //jedisPool.returnResource(jedis); 在close 方法中释放资源到连接池
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -104,10 +107,11 @@ public class JedisUtil {
 
     /**
      * 存储redis队列 --反向存储
+     *
      * @param key
      * @param value
      */
-    public static void rpush(String key,String value){
+    public static void rpush(String key, String value) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -117,7 +121,7 @@ public class JedisUtil {
             e.printStackTrace();
             //jedisPool.returnResource(jedis); 在close 方法中释放资源到连接池
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -125,19 +129,20 @@ public class JedisUtil {
 
     /**
      * 获取队列全部数据
+     *
      * @param key
      * @return
      */
-    public static List<byte[]> lrange(byte[] key){
+    public static List<byte[]> lrange(byte[] key) {
         Jedis jedis = null;
-        List<byte[]> list =null;
+        List<byte[]> list = null;
         try {
             jedis = jedisPool.getResource();
             list = jedis.lrange(key, 0, -1);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -146,19 +151,20 @@ public class JedisUtil {
 
     /**
      * 获取队列全部数据
+     *
      * @param key
      * @return
      */
-    public static List<String> lrange(String key){
+    public static List<String> lrange(String key) {
         Jedis jedis = null;
-        List<String> list =null;
+        List<String> list = null;
         try {
             jedis = jedisPool.getResource();
             list = jedis.lrange(key, 0, -1);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -168,19 +174,20 @@ public class JedisUtil {
 
     /**
      * 获取并取出列表中的第一个元素并从队列删除
+     *
      * @param key
      * @return
      */
-    public static String lpop(String key){
+    public static String lpop(String key) {
         Jedis jedis = null;
-        String value =null;
+        String value = null;
         try {
             jedis = jedisPool.getResource();
             value = jedis.lpop(key);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -189,19 +196,20 @@ public class JedisUtil {
 
     /**
      * 获取并取出列表中的第一个元素并从队列删除
+     *
      * @param key
      * @return
      */
-    public static byte[] lpop(byte[] key){
+    public static byte[] lpop(byte[] key) {
         Jedis jedis = null;
-        byte[] value =null;
+        byte[] value = null;
         try {
             jedis = jedisPool.getResource();
             value = jedis.lpop(key);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -210,19 +218,20 @@ public class JedisUtil {
 
     /**
      * 移除并获取列表最后一个元素
+     *
      * @param key
      * @return
      */
-    public static String rpop(String key){
+    public static String rpop(String key) {
         Jedis jedis = null;
-        String value =null;
+        String value = null;
         try {
             jedis = jedisPool.getResource();
-             value = jedis.rpop(key);
+            value = jedis.rpop(key);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -231,19 +240,20 @@ public class JedisUtil {
 
     /**
      * 获取并取出列表中的最后一个元素
+     *
      * @param key
      * @return
      */
-    public static byte[] rpop(byte[] key){
+    public static byte[] rpop(byte[] key) {
         Jedis jedis = null;
-        byte[] value =null;
+        byte[] value = null;
         try {
             jedis = jedisPool.getResource();
             value = jedis.rpop(key);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -252,19 +262,20 @@ public class JedisUtil {
 
     /**
      * 获取数据
+     *
      * @param key
      * @return
      */
-    public static byte[] get(byte[] key){
+    public static byte[] get(byte[] key) {
         Jedis jedis = null;
-        byte[] value =null;
+        byte[] value = null;
         try {
             jedis = jedisPool.getResource();
             value = jedis.get(key);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -273,19 +284,20 @@ public class JedisUtil {
 
     /**
      * 获取redis数据
+     *
      * @param key
      * @return
      */
-    public static String get(String key){
+    public static String get(String key) {
         Jedis jedis = null;
-        String value =null;
+        String value = null;
         try {
             jedis = jedisPool.getResource();
             value = jedis.get(key);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (null !=null){
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -294,18 +306,18 @@ public class JedisUtil {
 
     /**
      * 测试是否连接成功
+     *
      * @return
      */
-    public static String ping(){
+    public static String ping() {
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisPool.getResource();
             return jedis.ping();
-        } catch (Exception e){
-            logger.error("连接redis 发生异常：{}",e);
-        }
-        finally{
-            if (null !=null){
+        } catch (Exception e) {
+            logger.error("连接redis 发生异常：{}", e);
+        } finally {
+            if (null != null) {
                 jedis.close();
             }
         }
@@ -314,39 +326,41 @@ public class JedisUtil {
 
     /**
      * 通过key删除
+     *
      * @param key
      */
-    public static void del(String key){
+    public static void del(String key) {
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisPool.getResource();
             jedis.del(key);
-        }finally{
-            if (null !=null){
+        } finally {
+            if (null != null) {
                 jedis.close();
             }
         }
     }
 
-    public static void hset(String key,String field,String value){
+    public static void hset(String key, String field, String value) {
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisPool.getResource();
-            jedis.hset(key,field,value);
-        }finally{
-            if (null !=null){
+            jedis.hset(key, field, value);
+        } finally {
+            if (null != null) {
                 jedis.close();
             }
         }
     }
-    public static String hget(String key,String field){
+
+    public static String hget(String key, String field) {
         Jedis jedis = null;
-        try{
+        try {
             jedis = jedisPool.getResource();
             String value = jedis.hget(key, field);
             return value;
-        }finally{
-            if (null !=null){
+        } finally {
+            if (null != null) {
                 jedis.close();
             }
         }

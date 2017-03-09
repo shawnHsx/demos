@@ -15,14 +15,14 @@ import java.util.concurrent.*;
 public class ThreadTest {
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         List<String> strList = new ArrayList<String>();
 
-        for (int i = 0; i <100; i++) {
-            strList.add("String"+i);
+        for (int i = 0; i < 100; i++) {
+            strList.add("String" + i);
         }
         // 线程个数
-        int threadNum = strList.size()<5?strList.size():5;
+        int threadNum = strList.size() < 5 ? strList.size() : 5;
 
 
          /*int corePoolSize ：核心线程数 当线程数<corePoolSize ，会创建线程执行runnable
@@ -43,14 +43,14 @@ public class ThreadTest {
         4、当线程总数等于maximumPoolSize并且workQueue满了的时候执行handler的rejectedExecution。也就是拒绝策略。
         */
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,threadNum,300, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<Runnable>(3));
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, threadNum, 300, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<Runnable>(3));
 
 
         for (int i = 0; i < threadNum; i++) {
-            executor.execute(new PrintStrThread(strList,i,threadNum));
+            executor.execute(new PrintStrThread(strList, i, threadNum));
         }
         //shutdown只是给队列的线程发interrupt 不能接受新任务 但等待老任务结束
-          executor.shutdown();
+        executor.shutdown();
         // 立即结束线程
         executor.shutdownNow();
 
@@ -60,7 +60,7 @@ public class ThreadTest {
 }
 
 
-class PrintStrThread implements Runnable{
+class PrintStrThread implements Runnable {
 
     /**
      * 目标list
@@ -85,7 +85,7 @@ class PrintStrThread implements Runnable{
     @Override
     public void run() {
         int len = 0;
-        if(!CollectionUtils.isEmpty(this.strList)){
+        if (!CollectionUtils.isEmpty(this.strList)) {
             for (int i = 0; i < strList.size(); i++) {
                 try {
                     Thread.sleep(100L);
@@ -94,8 +94,8 @@ class PrintStrThread implements Runnable{
                 }
                 String s = strList.get(i);
                 // 线程满足该规则时打印集合中的数据
-                if (len % this.threadNum == this.num){
-                    System.out.println("线程编号："+this.num+",字符串："+s);
+                if (len % this.threadNum == this.num) {
+                    System.out.println("线程编号：" + this.num + ",字符串：" + s);
                 }
                 len++;
             }

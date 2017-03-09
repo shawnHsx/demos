@@ -49,9 +49,13 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
         </dependency>
+        <!--        <dependency>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>activemq-all</artifactId>
+                </dependency>-->
         <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
+            <groupId>org.jboss.marshalling</groupId>
+            <artifactId>jboss-marshalling-serial</artifactId>
         </dependency>
     </dependencies>
 </project>

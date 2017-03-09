@@ -20,14 +20,14 @@ public class TimeServer {
 
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("the time server is start in port :"+ port);
+            System.out.println("the time server is start in port :" + port);
             Socket socket = null;
             // 任务队列
-            ArrayBlockingQueue<Runnable> task = new ArrayBlockingQueue<>(10000);
+            ArrayBlockingQueue<Runnable> task = new ArrayBlockingQueue<Runnable>(10000);
             // 线程池
-            ExecutorService executor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),50,120L, TimeUnit.SECONDS,task);
-            System.out.println("处理器个数："+Runtime.getRuntime().availableProcessors());
-            while (true){
+            ExecutorService executor = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), 50, 120L, TimeUnit.SECONDS, task);
+            System.out.println("处理器个数：" + Runtime.getRuntime().availableProcessors());
+            while (true) {
                 socket = serverSocket.accept();
                 // 处理客户端请求
                 executor.execute(new TimeServerHandler(socket));

@@ -23,7 +23,7 @@ public class MethodAreaOutOfMemeoryErrorDemo {
      * 两个参数(设置永久带 ---方法区的大小)来达到这个目的。
      * 利用CGLib技术不断的生成动态Class,这些Class的信息会被存放在方法区中,
      * 如果方法区不是很大会造成方法去的OOM
-     *
+     * <p>
      * -XX:PermSize=10m -XX:MaxPermSize=10m
      * 异常信息：
      * Caused by: java.lang.OutOfMemoryError: PermGen space
@@ -31,14 +31,14 @@ public class MethodAreaOutOfMemeoryErrorDemo {
 
     public static void main(String[] tag) {
         try {
-            while (true){
+            while (true) {
                 Enhancer enhancer = new Enhancer();
                 enhancer.setSuperclass(Object.class);
                 enhancer.setUseCache(false);
                 enhancer.setCallback(new MethodInterceptor() {
                     @Override
                     public Object intercept(Object obj, Method method, Object[] params, MethodProxy methodProxy) throws Throwable {
-                        return methodProxy.invokeSuper(obj,params);
+                        return methodProxy.invokeSuper(obj, params);
                     }
                 });
                 // 返回代理对象

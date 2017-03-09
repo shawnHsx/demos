@@ -14,7 +14,7 @@ public class HeapOutOfMemeoryErrorDemo {
 
     private final static Logger logger = LoggerFactory.getLogger(HeapOutOfMemeoryErrorDemo.class);
 
-    public static void main(String[] tag){
+    public static void main(String[] tag) {
         headOutMemeory();
     }
 
@@ -22,17 +22,17 @@ public class HeapOutOfMemeoryErrorDemo {
      * 修改head 内存大小
      * -Xms5m -Xms5m
      */
-    static void headOutMemeory(){
+    static void headOutMemeory() {
 
         long count = 0L;
         try {
             List<Object> list = new ArrayList<Object>();
-            while (true){
+            while (true) {
                 list.add(new Object());
                 count++;
             }
         } catch (Throwable e) {
-            logger.error("当前创建对象个数：{}时，发生错误",count);
+            logger.error("当前创建对象个数：{}时，发生错误", count);
             e.printStackTrace();
         }
     }

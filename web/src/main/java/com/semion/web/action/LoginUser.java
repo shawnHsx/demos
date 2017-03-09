@@ -9,8 +9,8 @@ public class LoginUser implements Serializable {
 
 
     private static final long serialVersionUID = -6409115308367331221L;
-    private String userId ;
-    private String nick  ;
+    private String userId;
+    private String nick;
 
     public String getUserId() {
         return userId;

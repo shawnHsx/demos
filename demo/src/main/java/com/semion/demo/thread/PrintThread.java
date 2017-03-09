@@ -18,14 +18,14 @@ public class PrintThread implements Runnable {
     @Override
     public void run() {
 
-        System.out.println(threadName +" is running.......");
+        System.out.println(threadName + " is running.......");
 
        /* try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        System.out.println(threadName +" is end.......");
+        System.out.println(threadName + " is end.......");
 
     }
 }

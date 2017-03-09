@@ -7,6 +7,6 @@ public class TimeServer {
     public static void main(String[] args) {
         int port = 8080;
         AsynTimeServerHandler handler = new AsynTimeServerHandler(port);
-        new Thread(handler,"AsynTimeServerHandler").start();
+        new Thread(handler, "AsynTimeServerHandler").start();
     }
 }

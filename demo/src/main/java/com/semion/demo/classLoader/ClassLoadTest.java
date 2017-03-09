@@ -8,18 +8,19 @@ import java.util.logging.Logger;
  */
 public class ClassLoadTest {
 
-        public static void main(String args[]) {
-            try {
-                showClassloader();
-                //printLoader();
+    public static void main(String args[]) {
+        try {
+            showClassloader();
+            //printLoader();
 
-            } catch (Exception ex) {
-                Logger.getLogger(ClassLoadTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (Exception ex) {
+            Logger.getLogger(ClassLoadTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
     /**
      * 演示类加载器的 可见性  子类加载器可以看到父类加载器加载的类，反之不行。
+     *
      * @throws ClassNotFoundException
      */
     private static void showClassloader() throws ClassNotFoundException {
@@ -27,7 +28,7 @@ public class ClassLoadTest {
         System.out.println("ClassLoadTest.getClass().getClassLoader() : " + ClassLoadTest.class.getClassLoader());// sun.misc.Launcher$AppClassLoader@20cf2c80
 
         //尝试使用类Extension类加载器加载当前类  运行结果报错
-        Class.forName("com.semion.demo.classLoader.ClassLoadTest", true,ClassLoadTest.class.getClassLoader().getParent());
+        Class.forName("com.semion.demo.classLoader.ClassLoadTest", true, ClassLoadTest.class.getClassLoader().getParent());
 
 
     }
@@ -35,7 +36,7 @@ public class ClassLoadTest {
     /**
      * 打印类加载器
      */
-    public static void printLoader(){
+    public static void printLoader() {
         System.out.println(ClassLoader.getSystemClassLoader());
         System.out.println(ClassLoader.getSystemClassLoader().getParent());
         System.out.println(ClassLoader.getSystemClassLoader().getParent().getParent());

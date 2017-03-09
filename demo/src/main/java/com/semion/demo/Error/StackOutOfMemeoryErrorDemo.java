@@ -16,20 +16,18 @@ public class StackOutOfMemeoryErrorDemo {
      * 下面的程序可以用来验证这点
      * 由于在window平台的虚拟机中,java的线程是隐射到操作系统的内核线程上的,会导致操作系统假死.
      * -XX:MaxPermSize=56m -Xss5m
-     *
-     *
      */
 
 
-    public static void main(String[] tag){
-        StackOutOfMemeoryErrorDemo demo =new  StackOutOfMemeoryErrorDemo();
+    public static void main(String[] tag) {
+        StackOutOfMemeoryErrorDemo demo = new StackOutOfMemeoryErrorDemo();
         demo.stackLeakByThread();
     }
 
     private static volatile int threadNumber = 0;
 
-    public void stackLeakByThread(){
-        while (true){
+    public void stackLeakByThread() {
+        while (true) {
             new Thread() {
                 public void run() {
                     threadNumber++;

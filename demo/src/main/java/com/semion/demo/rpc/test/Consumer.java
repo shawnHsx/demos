@@ -18,7 +18,7 @@ public class Consumer {
     public static void main(String[] rag) throws Exception {
 
         //生成$Proxy0的class文件 反编译可查看  ----尚未获取该代理类待验证
-        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles",true);
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", true);
 
       /*  Properties properties = System.getProperties();
         Iterator<Map.Entry<Object, Object>> iterator = properties.entrySet().iterator();
@@ -30,7 +30,7 @@ public class Consumer {
             logger.info(key.toString() + " =========> " + value.toString());
         }*/
         // 获取远程代理对象接口
-        HelloService service = RPCFramework.refer(HelloService.class,"localhost",10000);
+        HelloService service = RPCFramework.refer(HelloService.class, "localhost", 10000);
 
         logger.info(service.getClass().getName());//com.sun.proxy.$Proxy0
 

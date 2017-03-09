@@ -30,13 +30,13 @@ public class TimeServerHandler implements Runnable {
 
             while (true) {
                 body = in.readLine();
-                System.out.println("====body :"+body);
+                System.out.println("====body :" + body);
                 if (body == null) {
                     break;
                 }
                 String now = new Date(System.currentTimeMillis()).toString();
                 currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? now : "===BAD ORDER===";
-                System.out.println("time is :"+currentTime);
+                System.out.println("time is :" + currentTime);
                 out.println("now is：" + currentTime);
                 out.flush();
             }

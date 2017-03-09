@@ -22,19 +22,19 @@ public class AopFactory implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        logger.info("调用方法名：{}",method.getName());
+        logger.info("调用方法名：{}", method.getName());
 
-        logger.info("参数个数："+args.length);
+        logger.info("参数个数：" + args.length);
         Class<?>[] parameterTypes = method.getParameterTypes();
-        for (Class<?> typeVariables:parameterTypes){
-            logger.info("参数类型名："+typeVariables.getName());
+        for (Class<?> typeVariables : parameterTypes) {
+            logger.info("参数类型名：" + typeVariables.getName());
         }
-        for (Object obj :args){
-            logger.info("参数：{}",obj);
+        for (Object obj : args) {
+            logger.info("参数：{}", obj);
         }
         // 调用目标对象方法
         Object invoke = method.invoke(this.proxyed, args);
-        logger.info("返回结果：{}",args);
+        logger.info("返回结果：{}", args);
         return invoke;
     }
 }

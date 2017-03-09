@@ -15,7 +15,8 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/Users/heshuanxu/work/workspace/logs/demos/system_info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>/Users/heshuanxu/work/workspace/logs/demos/system_info.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -36,7 +37,8 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/Users/heshuanxu/work/workspace/logs/demos/system_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>/Users/heshuanxu/work/workspace/logs/demos/system_error.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -78,7 +80,8 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/Users/heshuanxu/work/workspace/logs/demos/app_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>/Users/heshuanxu/work/workspace/logs/demos/app_error.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -92,15 +95,15 @@
 
     <!-- level:默认为root的打印级别;additivity:是否向上级loger传递打印信息。默认是true。-->
     <logger name="com.semion" level="${demos.log.level}" additivity="true">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="APP_INFO" />
-        <appender-ref ref="APP_ERROR" />
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="APP_INFO"/>
+        <appender-ref ref="APP_ERROR"/>
     </logger>
 
 
     <root level="INFO">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="SYS_INFO" />
-        <appender-ref ref="SYS_ERROR" />
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="SYS_INFO"/>
+        <appender-ref ref="SYS_ERROR"/>
     </root>
 </configuration>

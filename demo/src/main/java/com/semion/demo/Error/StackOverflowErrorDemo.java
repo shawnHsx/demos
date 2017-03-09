@@ -10,7 +10,7 @@ public class StackOverflowErrorDemo {
 
     private final static Logger logger = LoggerFactory.getLogger(StackOverflowErrorDemo.class);
 
-    public static void main(String[] tag){
+    public static void main(String[] tag) {
         StackOverflowErrorDemo demo = new StackOverflowErrorDemo();
         demo.stackOverflow();
     }
@@ -24,14 +24,15 @@ public class StackOverflowErrorDemo {
      * 且只有对Xss参数的设置,才对栈的分配有影响
      * -Xss512k
      */
-    public void stackOverflow(){
+    public void stackOverflow() {
         try {
             stackLeck1();
         } catch (Throwable e) {
-            logger.error("递归调用深度：{}",stackNumber1);
+            logger.error("递归调用深度：{}", stackNumber1);
             e.printStackTrace();
         }
     }
+
     /**
      * 递归调用
      */

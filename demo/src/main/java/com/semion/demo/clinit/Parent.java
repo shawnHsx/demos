@@ -11,6 +11,7 @@ public class Parent {
     private final static Logger logger = LoggerFactory.getLogger(Parent.class);
 
     static int A = 100;
+
     static {
         logger.info("Parent init...");
     }

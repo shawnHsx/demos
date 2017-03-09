@@ -24,13 +24,19 @@
     </bean>
 
     <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver" id="viewResolver">
-        <property name="suffix"><value>.vm</value></property>
+        <property name="suffix">
+            <value>.vm</value>
+        </property>
         <property name="prefix" value=""/>
         <property name="cache" value="false"/>
-        <property name="exposeSessionAttributes"><value>true</value></property>
+        <property name="exposeSessionAttributes">
+            <value>true</value>
+        </property>
         <!--<property name="toolboxConfigLocation" value="/WEB-INF/classes/tools.xml"></property>-->
         <property name="exposeSpringMacroHelpers" value="true"/>
-        <property name="contentType"><value>text/html;charset=utf-8</value></property>
+        <property name="contentType">
+            <value>text/html;charset=utf-8</value>
+        </property>
         <!--<property name="dateToolAttribute"><value>dateTool</value></property>
         <property name="numberToolAttribute"><value>numberTool</value></property>-->
     </bean>

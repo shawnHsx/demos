@@ -13,16 +13,6 @@
         <module>demo</module>
         <module>web</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j.version>1.7.5</slf4j.version>
@@ -185,16 +175,32 @@
                 <version>4.1.6.Final</version>
             </dependency>
 
+            <!--            <dependency>
+                            <groupId>org.apache.activemq</groupId>
+                            <artifactId>activemq-all</artifactId>
+                            <version>5.14.3</version>
+                        </dependency>-->
             <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>activemq-all</artifactId>
-                <version>5.14.3</version>
+                <groupId>org.jboss.marshalling</groupId>
+                <artifactId>jboss-marshalling-serial</artifactId>
+                <version>2.0.0.Beta2</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
     <build>
         <finalName>demos</finalName>
+        <!--指定编译器 防止idea 自动使用1.5编译器-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

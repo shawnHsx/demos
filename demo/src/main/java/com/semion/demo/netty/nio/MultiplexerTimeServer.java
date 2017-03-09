@@ -74,29 +74,29 @@ public class MultiplexerTimeServer implements Runnable {
                 SocketChannel socketChannel = ssc.accept();
                 socketChannel.configureBlocking(false);
                 // 新的连接注册到selector
-                socketChannel.register(selector,SelectionKey.OP_READ);
+                socketChannel.register(selector, SelectionKey.OP_READ);
             }
-            if(key.isReadable()){
+            if (key.isReadable()) {
                 // 读取数据
-                SocketChannel  socketChannel = (SocketChannel) key.channel();
+                SocketChannel socketChannel = (SocketChannel) key.channel();
                 ByteBuffer readBuff = ByteBuffer.allocate(1024);
                 int readBytes = socketChannel.read(readBuff);
-                if(readBytes>0){
+                if (readBytes > 0) {
                     readBuff.flip();
                     byte[] bytes = new byte[readBuff.remaining()];
                     readBuff.get(bytes);
-                    String body = new String(bytes,"UTF-8");
-                    System.out.println("the time server receive order :"+body);
-                    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body)?
-                            new Date(System.currentTimeMillis()).toString():"BAD ORDER";
-                    System.out.println("currentTime:"+currentTime);
+                    String body = new String(bytes, "UTF-8");
+                    System.out.println("the time server receive order :" + body);
+                    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ?
+                            new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
+                    System.out.println("currentTime:" + currentTime);
                     // 写数据到客户端
-                    doWrite(socketChannel,currentTime);
-                }else if(readBytes<0){
+                    doWrite(socketChannel, currentTime);
+                } else if (readBytes < 0) {
                     // 客户端关闭连接
                     key.cancel();
                     socketChannel.close();
-                }else {
+                } else {
                     System.out.println("no data readed ");
                 }
             }
@@ -104,7 +104,7 @@ public class MultiplexerTimeServer implements Runnable {
     }
 
     private void doWrite(SocketChannel socketChannel, String response) throws IOException {
-        if(!StringUtils.isEmpty(response)){
+        if (!StringUtils.isEmpty(response)) {
             byte[] bytes = response.getBytes();
             ByteBuffer writeBuff = ByteBuffer.allocate(bytes.length);
             writeBuff.put(bytes);

@@ -17,7 +17,7 @@ public class ConnectorInvocationHadle implements InvocationHandler {
     private String host;
     private int port;
 
-    public ConnectorInvocationHadle(String host,int port) {
+    public ConnectorInvocationHadle(String host, int port) {
         this.host = host;
         this.port = port;
     }
@@ -45,7 +45,7 @@ public class ConnectorInvocationHadle implements InvocationHandler {
                     if (object instanceof Throwable) {
                         throw (Throwable) object;
                     }
-                    return  object;
+                    return object;
                 } finally {
                     input.close();
                 }

@@ -26,18 +26,17 @@ public class RPCFramework {
      */
 
 
-
-
     /**
      * 导出远程接口 接受客户端socket连接 并解析参数
+     *
      * @param serviceName
      * @param port
      */
-    public static void exprot(final Object serviceName,final int port) throws Exception {
+    public static void exprot(final Object serviceName, final int port) throws Exception {
 
         ServerSocket server = new ServerSocket(port);
 
-        while (true){
+        while (true) {
             final Socket socket = server.accept();
             // 创建一个线程并启动
             new Thread(new Runnable() {
@@ -49,9 +48,9 @@ public class RPCFramework {
                         try {
                             String methodName = input.readUTF();
 
-                            Class<?>[] paramTypes = (Class<?>[])input.readObject();
+                            Class<?>[] paramTypes = (Class<?>[]) input.readObject();
 
-                            Object[] params = (Object[])input.readObject();
+                            Object[] params = (Object[]) input.readObject();
 
                             Object result = null;
 
@@ -80,20 +79,20 @@ public class RPCFramework {
         }
 
 
-
     }
 
     /**
      * 远程接口代理实现
+     *
      * @param interfaceClass 被代理接口
-     * @param host 服务器host
-     * @param port socket连接端口
-     * @param <T> 泛型接口
+     * @param host           服务器host
+     * @param port           socket连接端口
+     * @param <T>            泛型接口
      * @return 代理对象
      */
-    public static <T> T refer(final Class<T> interfaceClass,final String host,final int port){
+    public static <T> T refer(final Class<T> interfaceClass, final String host, final int port) {
         // 代理类的具体实现与服务端socket连接
-        InvocationHandler handler = new  ConnectorInvocationHadle(host,port);
+        InvocationHandler handler = new ConnectorInvocationHadle(host, port);
         // 被代理的接口
         Class<?>[] interfaces = new Class[]{interfaceClass};
         // sun.misc.ProxyGenerator.generateProxyClass() 生成代理对象类的字节码文件

@@ -14,9 +14,8 @@ import java.lang.reflect.Proxy;
  * Created by heshuanxu on 2016/6/6.
  * 通过jdk自带的InvocationHadle 实现AOP代理切面织入
  * 属于非侵入式编程本身就是侵入式
- *
+ * <p>
  * 缺点：性能不高，只能代理实现了接口的类  推荐使用 cglib
- *
  */
 public class InvocationHadleTest {
 
@@ -28,7 +27,7 @@ public class InvocationHadleTest {
         //System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles",true);
 
         // 通过反射获取目标对象实例
-        Hello hello= (Hello) Class.forName("HelloImpl").newInstance();
+        Hello hello = (Hello) Class.forName("HelloImpl").newInstance();
 
         // 获取aop切面类（在目标方法前后需要做的动作）
         InvocationHandler handler = new AopFactory(hello);// 目标对象通过构造方法传入代理类
@@ -42,7 +41,7 @@ public class InvocationHadleTest {
          * Class<?>[] interfaces, 所有接口
          * InvocationHandler h 实现InvocationHandler的子类
          */
-        Hello proxy = (Hello) Proxy.newProxyInstance(hello.getClass().getClassLoader(), hello.getClass().getInterfaces(),handler);
+        Hello proxy = (Hello) Proxy.newProxyInstance(hello.getClass().getClassLoader(), hello.getClass().getInterfaces(), handler);
 
         // 通过代理对象调用方法
         proxy.setInfo("hello", "world");
@@ -50,6 +49,7 @@ public class InvocationHadleTest {
 
     /**
      * 保存代理类到本地
+     *
      * @param path
      */
     public static void writeProxyClassToHardDisk(String path) {

@@ -7,8 +7,8 @@ public class TimeClient {
     public static void main(String[] args) {
         int port = 8080;
 
-        AsynchronousTimeClientHandler clientHandler = new AsynchronousTimeClientHandler("localhost",port);
+        AsynchronousTimeClientHandler clientHandler = new AsynchronousTimeClientHandler("localhost", port);
 
-        new Thread(clientHandler,"AsynchronousTimeClientHandler").start();
+        new Thread(clientHandler, "AsynchronousTimeClientHandler").start();
     }
 }

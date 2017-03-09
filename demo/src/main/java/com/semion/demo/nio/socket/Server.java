@@ -88,6 +88,7 @@ public class Server {
 
     /**
      * 读取消息并返回消息到client
+     *
      * @param key
      * @throws IOException
      */
@@ -97,12 +98,13 @@ public class Server {
         sc.read(buffer);
         byte[] array = buffer.array();
         String message = new String(array).trim();
-        logger.info("server received msg ：{}",message);
+        logger.info("server received msg ：{}", message);
         sc.write(ByteBuffer.wrap(message.getBytes()));// 消息返回给client
     }
 
     /**
      * 注册读就绪事件到selector，并发送消息到client
+     *
      * @param key
      * @throws IOException
      */

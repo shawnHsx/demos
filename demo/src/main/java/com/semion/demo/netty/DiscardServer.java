@@ -12,7 +12,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class DiscardServer {
 
 
-
     private int port;
 
     public DiscardServer(int port) {
@@ -20,21 +19,21 @@ public class DiscardServer {
     }
 
 
-    public void run()  {
+    public void run() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
-            bootstrap.group(bossGroup,workerGroup);
+            bootstrap.group(bossGroup, workerGroup);
             bootstrap.channel(new NioServerSocketChannel().getClass());
             bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
                     ChannelPipeline pipeline = socketChannel.pipeline();
-                    pipeline.addLast( new DiscardServerHandler());
+                    pipeline.addLast(new DiscardServerHandler());
                 }
             });
-            bootstrap.option(ChannelOption.SO_BACKLOG,128);
-            bootstrap.childOption(ChannelOption.SO_KEEPALIVE,true);
+            bootstrap.option(ChannelOption.SO_BACKLOG, 128);
+            bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
 
             ChannelFuture future = bootstrap.bind(port).sync();
             future.channel().closeFuture().sync();
@@ -47,7 +46,7 @@ public class DiscardServer {
         }
     }
 
-    public static void main(String[] rags){
+    public static void main(String[] rags) {
         System.out.println("start listening ");
         new DiscardServer(8080).run();
     }

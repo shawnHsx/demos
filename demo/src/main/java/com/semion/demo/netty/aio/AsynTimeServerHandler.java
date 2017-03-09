@@ -25,7 +25,7 @@ public class AsynTimeServerHandler implements Runnable {
         try {
             asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
             asynchronousServerSocketChannel.bind(new InetSocketAddress(port));
-            System.out.println("the time server[asyn] start ino port :"+port);
+            System.out.println("the time server[asyn] start ino port :" + port);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,9 +47,9 @@ public class AsynTimeServerHandler implements Runnable {
         asynchronousServerSocketChannel.accept(this, new CompletionHandler<AsynchronousSocketChannel, AsynTimeServerHandler>() {
             @Override
             public void completed(AsynchronousSocketChannel result, AsynTimeServerHandler attachment) {
-                attachment.asynchronousServerSocketChannel.accept(attachment,this);
+                attachment.asynchronousServerSocketChannel.accept(attachment, this);
                 ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-                result.read(byteBuffer, byteBuffer,new ReadCompletionHandler(result));
+                result.read(byteBuffer, byteBuffer, new ReadCompletionHandler(result));
             }
 
             @Override

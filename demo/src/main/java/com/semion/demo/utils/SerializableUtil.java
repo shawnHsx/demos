@@ -1,4 +1,5 @@
 package com.semion.demo.utils;
+
 import java.io.*;
 
 /**
@@ -7,6 +8,7 @@ import java.io.*;
 public class SerializableUtil {
     /**
      * 将对象转为字节数组
+     *
      * @param object
      * @return
      */
@@ -18,17 +20,19 @@ public class SerializableUtil {
             oos.writeObject(object);
             byte[] bytes = baos.toByteArray();
             return bytes;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         } finally {
             try {
                 oos.close();
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
     }
 
     /**
      * 将字节数组反序列化为对象
+     *
      * @param bytes
      * @return
      */
@@ -39,14 +43,15 @@ public class SerializableUtil {
             ois = new ObjectInputStream(bais);
             Object object = ois.readObject();
             return object;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
-        } catch(ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         } finally {
             try {
                 ois.close();
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
     }
 }
