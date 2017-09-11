@@ -4,7 +4,6 @@ package com.semion.demo.netty.demo3;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 /**
  * Created by heshuanxu on 2017/2/28.
