@@ -29,7 +29,6 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         // 发生异常时关闭连接
         cause.printStackTrace();
-        ;
         ctx.close();
     }
 }

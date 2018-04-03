@@ -8,12 +8,18 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by heshuanxu on 2017/2/23.
  * 展示服务端与客户端TCP 粘包问题----解决方案见demo2
  */
 public class TimeServer {
+
+    private static final Logger logger = LoggerFactory.getLogger(TimeServer.class);
+
+
     public static void main(String[] args) {
         int port = 8080;
 
@@ -37,17 +43,18 @@ public class TimeServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            System.out.println("==================server initChannel exce");
+                            logger.info("==================server initChannel exce");
                             // 绑定处理类
                             socketChannel.pipeline().addLast(new NettyTimeServerHandler());
                         }
                     });
             // 异步通知回调
-            System.out.println("bind 端口方法开始执行");
+            logger.info("bind 端口方法开始执行");
             ChannelFuture future = bootstrap.bind(port).sync();// 绑定端口，调用sync方法阻塞当前线程 等待绑定完成结果
-            System.out.println("bind 端口方法执行完成");
+            logger.info("bind 端口方法执行完成");
 
-            future.channel().closeFuture().sync();// 等待服务端链路关闭之后main函数才退出
+            ChannelFuture sync = future.channel().closeFuture().sync();// 等待服务端链路关闭之后main函数才退出
+            logger.info("sync==========");
         } finally {
             // 优雅退出
             bossGroup.shutdownGracefully();

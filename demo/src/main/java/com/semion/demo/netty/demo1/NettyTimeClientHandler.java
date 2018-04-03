@@ -56,7 +56,7 @@ public class NettyTimeClientHandler extends ChannelInboundHandlerAdapter {
         byte[] bytes = new byte[buf.readableBytes()];
         buf.readBytes(bytes);// 拷贝到bytes
         String body = new String(bytes, "UTF-8");
-        System.out.println("NOw is :" + body + ",counter is " + (++counter));
+        System.out.println("Now is :" + body + ",counter is " + (++counter));
     }
 
     @Override
