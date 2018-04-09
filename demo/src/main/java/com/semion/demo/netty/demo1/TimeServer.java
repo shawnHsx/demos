@@ -38,9 +38,9 @@ public class TimeServer {
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();// 服务端的辅助启动类
             bootstrap.group(bossGroup, workGroup)
-                    .channel(NioServerSocketChannel.class)// NioServerSocketChannel等同于 NIO 中的ServerSocketChannel
+                    .channel(NioServerSocketChannel.class)// NioServerSocketChannel等同于 NIO 中的ServerSocketChannel 启动时会执行
                     .option(ChannelOption.SO_BACKLOG, 1024)// 设置TCP参数 接受连接的缓冲池大小
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                    .childHandler(new ChannelInitializer<SocketChannel>() {// 客户端connect之后执行 处理网络IO时间，编解码等。
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             logger.info("==================server initChannel exce");

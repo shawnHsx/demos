@@ -25,7 +25,7 @@ public class TimeClient {
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
                     .option(ChannelOption.TCP_NODELAY, true)
-                    .handler(new ChannelInitializer<SocketChannel>() {
+                    .handler(new ChannelInitializer<SocketChannel>() {// 内部类
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             System.out.println("========initChannel exec...");
