@@ -7,6 +7,8 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by heshuanxu on 2018/4/9.
  */
@@ -27,15 +29,14 @@ public class HystrixFallback4Exception extends HystrixCommand<String> {
 
     public HystrixFallback4Exception(String name) {
         super(HystrixCommandGroupKey.Factory.asKey("FallbackGroup"));
-                                /* 配置依赖超时时间,500毫秒*/
-                //.andCommandPropertiesDefaults(HystrixCommandProperties.Setter().withExecutionIsolationThreadTimeoutInMilliseconds(500)));
         this.name = name;
     }
 
     @Override
-    protected String run(){
-        throw new HystrixBadRequestException("HystrixBadRequestException is never trigger fallback");
-        //return name;
+    protected String run() throws Exception {
+        // throw new RuntimeException("HystrixBadRequestException is never trigger fallback");
+        TimeUnit.SECONDS.sleep(3);
+        return name;
     }
 
     @Override
