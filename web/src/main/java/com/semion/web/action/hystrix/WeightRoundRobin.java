@@ -23,10 +23,10 @@ public class WeightRoundRobin {
     static {
         Node s1 = new Node("100", 2);
         Node s2 = new Node("101", 3);
-        Node s3 = new Node("102", 1);
+        Node s3 = new Node("102", -1);// 权重为负数 当前node不可用
         nodeList.add(s1);
         nodeList.add(s2);
-        //nodeList.add(s3);
+        nodeList.add(s3);
     }
     /** 
      * @Author: heshuanxu 
