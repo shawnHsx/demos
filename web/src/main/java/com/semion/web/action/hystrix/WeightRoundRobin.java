@@ -21,8 +21,8 @@ public class WeightRoundRobin {
     private static final List<Node> nodeList = new ArrayList<Node>();//节点集合
 
     static {
-        Node s1 = new Node("100", 4);
-        Node s2 = new Node("101", 6);
+        Node s1 = new Node("100", 2);
+        Node s2 = new Node("101", 3);
         Node s3 = new Node("102", 1);
         nodeList.add(s1);
         nodeList.add(s2);
@@ -55,11 +55,7 @@ public class WeightRoundRobin {
                 resultNode = currentNode;
             }
         }
-        if (resultNode == null) {
-            return null;
-        }
         resultNode.currentWeight = resultNode.currentWeight-total;
-        System.out.println("选取节点:"+resultNode.getChannel());
         return resultNode;
     }
 
@@ -68,7 +64,7 @@ public class WeightRoundRobin {
         WeightRoundRobin obj = new WeightRoundRobin();
         Map<String, Integer> countResult = new HashMap<String, Integer>();
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10000; i++) {
 
             Node node = obj.getNode(nodeList);// 加权轮询算法
 
