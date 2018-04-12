@@ -16,7 +16,11 @@ public class MyTimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String body = (String) msg;
+        ByteBuf buffer = (ByteBuf) msg;
+        byte[] req = new byte[buffer.readableBytes()];
+        buffer.readBytes(req);
+        String body = new String(req, "UTF-8").substring(0, req.length - System.getProperty("line.separator").length());
+        //String body =(String)msg;
         System.out.println("the time server receive order :" + body + ", counter is :" + (++counter));
         String currentTime = "QUERY TIMER ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
         currentTime += System.getProperty("line.separator");

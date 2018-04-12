@@ -26,7 +26,7 @@ public class MyTimeClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("channelActive 方法被调用");
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 100; i++) {
             ByteBuf buffer = Unpooled.buffer(this.req.length);
             buffer.writeBytes(this.req);
             ctx.writeAndFlush(buffer);
@@ -36,7 +36,13 @@ public class MyTimeClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         logger.info("channelRead 方法被调用");
-        String body = (String) msg;
+        ByteBuf buf = (ByteBuf) msg;
+        byte[] bytes = new byte[buf.readableBytes()];
+        buf.readBytes(bytes);// 拷贝到bytes
+        String body = new String(bytes, "UTF-8");
+
+        //String body =(String)msg;
+
         System.out.println("Now is :" + body + ", counter is " + ++counter);
     }
 

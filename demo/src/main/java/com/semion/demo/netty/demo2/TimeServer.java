@@ -23,7 +23,7 @@ import io.netty.util.concurrent.GenericFutureListener;
 public class TimeServer {
     public static void main(String[] args) {
         int port = 8080;
-        //new TimeServer().bind(port);
+        new TimeServer().bind(port);
     }
 
     private void bind(int port) {
