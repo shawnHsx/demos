@@ -1,9 +1,6 @@
 package com.semion.web.action.hystrix;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by heshuanxu on 2018/4/10.
@@ -18,15 +15,15 @@ public class WeightRoundRobin {
            (3) 选中节点的currentWeight = currentWeight - totalWeight；
 
        */
-    private static final List<Node> nodeList = new ArrayList<Node>();//节点集合
+    public static List<Node> nodeList = new ArrayList<Node>();//节点集合
 
     static {
         Node s1 = new Node("100", 2);
         Node s2 = new Node("101", 3);
-        Node s3 = new Node("102", -1);// 权重为负数 当前node不可用
+        //Node s3 = new Node("102", -1);// 权重为负数 当前node不可用
         nodeList.add(s1);
         nodeList.add(s2);
-        nodeList.add(s3);
+        //nodeList.add(s3);
     }
     /** 
      * @Author: heshuanxu 
@@ -60,14 +57,42 @@ public class WeightRoundRobin {
     }
 
 
-    public static void main(String[] args) {
+    public static String weightRandom()
+    {
+        //重新建立一個map,避免出現由於服務器上線和下線導致的並發問題
+        Map<String,Integer> serverMap  = new HashMap<String,Integer>();
+        //serverMap.putAll(serverWeigthMap);
+        //獲取ip列表list
+        Set<String> keySet = serverMap.keySet();
+        Iterator<String> it = keySet.iterator();
+
+        List<String> serverList = new ArrayList<String>();
+
+        while (it.hasNext()) {
+            String server = it.next();
+            Integer weight = serverMap.get(server);
+            for (int i = 0; i < weight; i++) {
+                serverList.add(server);
+            }
+        }
+        Random random = new Random();
+        int randomPos = random.nextInt(serverList.size());
+
+        String server = serverList.get(randomPos);
+        return server;
+    }
+
+
+    public static void main(String[] args) throws InterruptedException {
         WeightRoundRobin obj = new WeightRoundRobin();
         Map<String, Integer> countResult = new HashMap<String, Integer>();
-
-        for (int i = 0; i < 10000; i++) {
-
+        new Thread(new FlushData(nodeList)).start();// 线程修改集合大小
+        for (int i = 0; i < 1000; i++) {
+            long l = System.currentTimeMillis();
             Node node = obj.getNode(nodeList);// 加权轮询算法
+            long l2 = System.currentTimeMillis();
 
+            Thread.sleep(100);
             String log = "node:" + node.channel + ";weight:" + node.weight;
             if (countResult.containsKey(log)) {
                 countResult.put(log, countResult.get(log) + 1);

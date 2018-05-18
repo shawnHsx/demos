@@ -9,4 +9,17 @@
     <bean id="jedisUtil" class="com.semion.web.action.JedisUtil">
     </bean>
 
+
+    <bean name="" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="15"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="queueCapacity" value="100"/>
+    </bean>
+
+    <!--自定义任务-->
+    <bean id="helloTask" class="com.semion.web.action.quartz.HelloTask"></bean>
+
+
+
+
 </beans>
