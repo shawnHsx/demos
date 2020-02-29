@@ -12,7 +12,8 @@ public class ThreadLocalTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Sequence sequence = new SequenceImpl2();
+        Sequence sequence = new SequenceImpl();
+        //Sequence sequence = new SequenceImpl2();
 
         Thread t1 = new Thread(new ThreadA(sequence));
         Thread t2 = new Thread(new ThreadA(sequence));
@@ -55,7 +56,8 @@ class SequenceImpl2 implements Sequence {
     private final static Logger logger = LoggerFactory.getLogger(SequenceImpl2.class);
 
     /**
-     * 此处重写initialValue(属于ThreadLocal类)方法，默认返回为null；实现了共享static变量 但是每个线程都是独立的，不会发生非线程安全问题
+     * 此处重写initialValue(属于ThreadLocal类)方法，默认返回为null；
+     * 实现了共享static变量 但是每个线程都是独立的，不会发生非线程安全问题
      * <p>
      * numContainer 维护了线程局部变量的Map类型，initialValue 方法是需要开发者来实现的，获取变量的初始值。
      */
