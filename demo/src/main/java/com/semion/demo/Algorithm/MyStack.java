@@ -71,7 +71,7 @@ public class MyStack {
         //System.out.println(generate);
 
 
-        getRow(3);
+        //getRow(3);
         //myreverse(s);
         String[] ss = {"h","e","l","0"};
 
@@ -83,7 +83,8 @@ public class MyStack {
 
         char[] chars = s.toCharArray();
         //HashSet<Character> set = new HashSet(Arrays.asList('a','e','i','o','u'));
-        int left =0; int right = chars.length-1;
+        int left =0;
+        int right = chars.length-1;
 
         while (left<right){
             while (!set.contains(chars[right])){
@@ -121,7 +122,7 @@ public class MyStack {
     }
 
     /**
-     * 字符串反转
+     * 字符串反转--通过数组前后交换位置
      * @param str
      * @return
      */
@@ -177,35 +178,5 @@ public class MyStack {
         }
         return list;
     }
-
-    public static List<Integer> getRow(int rowIndex) {
-        if(rowIndex<0) return null;
-        List<List<Integer>> list = new ArrayList<>();
-        for(int i=0;i<rowIndex;i++) {
-            List<Integer>   rowList = new ArrayList<>();
-            for (int j = 0; j <=i; j++) {
-                if(j==0 || i==j){
-                    rowList.add(1);
-                }else {
-                    List<Integer>  preRowList = list.get(i-1);
-                    int num = preRowList.get(j) + preRowList.get(j - 1);
-                    rowList.add(num);
-                }
-            }
-            list.add(rowList);
-        }
-        return list.get(rowIndex-1);
-    }
-
-   /* public List<Integer>  getRow(int numRows){
-        List<List<Integer>> list = new ArrayList<>();
-
-
-
-
-
-
-
-    }*/
 
 }
