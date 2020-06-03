@@ -14,19 +14,35 @@ public class MyLinkedList {
         l1.next = l2;
         l2.next = l3;
         l3.next = l4;
-
-        //ListNode listNode = reverseList(l1);
-        //System.out.println(listNode.val);
-
-
-        ListNode swapPairsNode = swapPairs(l1);
-        //System.out.println(swapPairsNode.val);
-
         int[] a = {2,2,2,4,4,4,4};
         int i = majorityElement(a);
         System.out.println(i);
 
     }
+
+    /***
+     * 获取链表中倒数第k个节点 使用快慢指针；让慢指针与快指针相差k个节点； 当快指针到达最后一个null节点时，慢指针即为第k个节点
+     * @param k
+     * @return
+     */
+    public ListNode getKthListNode(ListNode head,int k){
+        if(head ==null || k<0) return null;
+        ListNode curr = head;
+        ListNode fast = head;
+        int i =0;
+        // fast 先移动k个节点
+        while (i<k){
+            fast = fast.next;
+            i++;
+        }
+        // 两个节点同时移动，当fast为null 时 慢节点为倒数第k个节点
+        while (fast!=null){
+            curr = curr.next;
+            fast = fast.next;
+        }
+        return curr;
+    }
+
 
     /**
      * 合并两个有序链表
@@ -51,14 +67,8 @@ public class MyLinkedList {
             }
             pre = pre.next;
         }
-       /* if(l1!=null){
-            pre.next = l1;
-        }
-        if(l2!=null){
-            pre.next = l2;
-        }*/
+        // 处理剩余数据
         pre.next = (l1==null?l2:l1);
-
         return res.next;
     }
 
@@ -99,7 +109,7 @@ public class MyLinkedList {
     public static ListNode reverseList2(ListNode head){
         if(head==null || head.next == null)
             return head;
-        ListNode  p = reverseList(head.next);
+        ListNode  p = reverseList2(head.next);
         head.next.next = head;
         head.next = null;
         return p;
@@ -117,11 +127,10 @@ public class MyLinkedList {
     public  static  ListNode swap(ListNode head){
         if(head==null || head.next == null)
             return head;
-
         ListNode f = head;
         ListNode s = head.next;
         // 设置f节点的next
-        f.next = swap(head.next);
+        f.next = swap(head.next.next);
         // 设置s节点的next
         s.next = f;
         return s;
@@ -169,6 +178,22 @@ public class MyLinkedList {
             }
         }
         return 0;
+    }
+
+
+    public ListNode deleteNode(ListNode head, int val) {
+        if(head ==null) return null;
+        if(head.val == val) return  head.next;
+        // 头节点
+        ListNode pre =  head,curr = head.next;
+        // 非尾节点
+        while (curr!=null && curr.val != val){
+            pre = curr;
+            curr = curr.next;
+        }
+        // 删除节点
+        pre.next = curr.next;
+        return head;
     }
 
 

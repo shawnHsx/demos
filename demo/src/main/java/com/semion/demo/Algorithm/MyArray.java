@@ -46,7 +46,7 @@ public class MyArray {
 
 
     /***
-     * 合并两个需有数组，从后往前
+     * 合并两个有序数组，从后往前
      * @param nums1
      * @param m
      * @param nums2
@@ -63,13 +63,36 @@ public class MyArray {
         while ((p1 >= 0) && (p2 >= 0))
             // compare two elements from nums1 and nums2
             // and add the largest one in nums1
-            nums1[p--] = (nums1[p1] < nums2[p2]) ? nums2[p2--] : nums1[p1--];
-
-        // add missing elements from nums2
-        System.arraycopy(nums2, 0, nums1, 0, p2 + 1);
+            //nums1[p--] = (nums1[p1] < nums2[p2]) ? nums2[p2--] : nums1[p1--];
+            nums1[p--] = (nums1[p1--]<=nums2[p2]) ? nums2[p2--]:nums1[p1--];
+           // add missing elements from nums2
+         System.arraycopy(nums2, 0, nums1, 0, p2 + 1);
     }
 
-
+    // 合并有序数组
+    public void merge3(int[] nums1, int m, int[] nums2, int n) {
+        int p1=0;
+        int p2=0;
+        int p =0;
+        int[] nums1_copy = new int[m];
+        System.arraycopy(nums1,0,nums1,0,m);
+        while(p1<m && p2<n){
+            if(nums1_copy[p1] <= nums2[p2]){
+                nums1[p] = nums1_copy[p1];
+                p1++;
+            }else{
+                nums1[p] = nums2[p2];
+                p2++;
+            }
+            p++;
+        }
+        if(p1<m){
+            System.arraycopy(nums1_copy,p1,nums1,p1+p2,m+n-p1-p2);
+        }
+        if(p2<n){
+            System.arraycopy(nums2,p2,nums1,p1+p2,m+n-p1-p2);
+        }
+    }
 
 
 }
