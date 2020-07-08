@@ -89,13 +89,13 @@ personal code repository
     }
     
    
-   /**
+    /**
      * 反转前m个节点
      * @param head
      * @param m
      * @return
      */ 
-  public static LinkNode reverseMth(LinkNode head, int m) {
+   public static LinkNode reverseMth(LinkNode head, int m) {
 
         if(head == null || m <=1){
             return head;
@@ -127,7 +127,7 @@ personal code repository
     }
     
     
-   /**
+    /**
      * 反转后m个节点 非递归
      * @param head
      * @param m
@@ -214,18 +214,17 @@ personal code repository
         return  dummy.next;
     } 
     
-    
-/**
- * 链表定义
- */
-class LinkNode{
-    int val;
-    LinkNode next;
-    public LinkNode(int val){
-        this.val = val;
+    /**
+     * 链表定义
+     */
+    class LinkNode{
+        int val;
+        LinkNode next;
+        public LinkNode(int val){
+            this.val = val;
+        }
     }
-}
-    
+
     
     
     
