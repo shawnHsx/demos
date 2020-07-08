@@ -95,7 +95,7 @@ personal code repository
      * @param m
      * @return
      */ 
-   public static LinkNode reverseMth(LinkNode head, int m) {
+     public static LinkNode reverseMth(LinkNode head, int m) {
 
         if(head == null || m <=1){
             return head;
