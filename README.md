@@ -242,6 +242,26 @@ personal code repository
         }
         return dummy.next;
     }
+    
+     /**
+     * 反转相邻节点---递归
+     * @param start
+     * @return
+     */
+    private static LinkNode reverseInPairsRecur(LinkNode start){
+        if(start==null || start.next == null){
+            return start;
+        }
+        // 反转前右侧节点
+        LinkNode right = start.next;
+        // right 节点之后的节点反转
+        LinkNode temp = reverseInPairsRecur(start.next.next);
+
+        start.next = temp;
+        right.next= start;
+
+        return right;
+    }
 
     
     
