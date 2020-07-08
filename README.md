@@ -214,6 +214,38 @@ personal code repository
         return  dummy.next;
     } 
     
+     /**
+     * 反转相邻节点
+     * @param start
+     * @return
+     */
+    private static LinkNode reverseInPairs(LinkNode start){
+        if(start==null || start.next == null){
+            return start;
+        }
+        // 构造虚拟节点 0 --1 --2 --3 --4
+        LinkNode dummy = new LinkNode(0);
+        dummy.next = start;
+
+        LinkNode curr = dummy;
+
+        while(curr.next!=null && curr.next.next!=null ){
+            LinkNode left = curr.next;
+            LinkNode right = curr.next.next;
+
+            curr.next = right;
+            left.next = right.next;
+            right.next = left;
+            
+            // 移动到反转后的节点
+            curr = left;
+        }
+        return dummy.next;
+    }
+
+    
+    
+    
     /**
      * 链表定义
      */
