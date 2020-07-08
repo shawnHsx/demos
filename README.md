@@ -215,7 +215,9 @@ personal code repository
     } 
     
     
-/** 链表定义*/  
+/**
+ * 链表定义
+ */
 class LinkNode{
     int val;
     LinkNode next;
