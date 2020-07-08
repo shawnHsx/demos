@@ -262,6 +262,43 @@ personal code repository
 
         return right;
     }
+    
+    
+     /**
+     * 判断链表是否回文结构
+     * @param start
+     * @return
+     */
+    private static boolean isPalindrome(LinkNode start){
+        if(start==null || start.next == null){
+            return true;
+        }
+        // 快慢指针找到中间节点
+        LinkNode slow = start;
+        LinkNode fast = start;
+
+        while (fast.next !=null &&  fast.next.next!=null  ){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // 反转中间节点右测节点
+        LinkNode rhead = reverseAllList(slow.next);
+
+        boolean result = true;
+        // 开始比较
+        LinkNode curr = rhead;
+        while (curr!=null){
+            if(start.val != curr.val){
+                result = false;
+                break;
+            }
+            curr = curr.next;
+            start = start.next;
+        }
+        return result;
+    }
+
 
     
     
