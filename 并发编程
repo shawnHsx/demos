@@ -1,0 +1,78 @@
+## 并发编程
+
+力扣：https://leetcode.cn/problems/print-foobar-alternately/description/
+
+
+class FooBar {
+
+    // 使用公平锁
+    Lock lock = new ReentrantLock(true);
+    private final Condition condition = lock.newCondition();
+    
+    // 控制while条件
+    private volatile int flag = 0;
+
+    private int n;
+
+    public FooBar(int n) {
+        this.n = n;
+    }
+
+  public void foo(Runnable printFoo) throws InterruptedException {
+        for (int i = 0; i < n; i++) {
+            lock.lock();
+            while (flag != 0) {
+                condition.await();
+            }
+            //使用if 会有虚假唤醒的情况 , 为了避免虚假唤醒，推荐使用 while 循环
+           /* if (flag != 0) {
+                condition.await();
+            }*/
+            // printFoo.run() outputs "foo". Do not change or remove this line.
+            printFoo.run();
+            flag = 1;
+            condition.signal();
+            lock.unlock();
+        }
+    }
+
+    public void bar(Runnable printBar) throws InterruptedException {
+        for (int i = 0; i < n; i++) {
+            lock.lock();
+            while (flag != 1) {
+                condition.await();
+            }
+            // 使用if 会有虚假唤醒的情况,为了避免虚假唤醒，推荐使用 while 循环
+           /* if (flag != 1) {
+                condition.await();
+            }*/
+            // printBar.run() outputs "bar". Do not change or remove this line.
+            printBar.run();
+            flag = 0;
+            condition.signal();
+            lock.unlock();
+        }
+    }
+}
+
+## synchronized + wait+ nofify
+
+synchronized (lock) {
+    if (condition) {
+        lock.wait();
+    }
+    // 执行后续操作
+}
+
+这样的代码可能会在没有明确通知的情况下被唤醒，即使条件 condition 为假。因此，在唤醒后，线程可能会继续执行后续操作，而实际上并没有符合预期的条件。这会导致程序逻辑错误。
+
+synchronized (lock) {
+    while (condition) {
+        lock.wait();
+    }
+    // 执行后续操作
+}
+即使线程在没有明确通知的情况下被唤醒，它会重新检查条件。如果条件仍然为真，线程将继续等待；如果条件为假，线程将继续执行后续操作。
+使用 while 循环能够更好地保护代码免受虚假唤醒的影响，确保在满足特定条件之前，线程一直等待。
+
+
